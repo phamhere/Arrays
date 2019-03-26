@@ -28,6 +28,11 @@ Array *create_array(int capacity)
   arr->count = 0;
   // Allocate memory for elements
   arr->elements = malloc(sizeof(char *) * capacity);
+  // Initialize all values in new array to NULL
+  for (int i = 0; i < arr->capacity; i++)
+  {
+    arr->elements[i] = NULL;
+  }
 
   return arr;
 }
@@ -176,7 +181,7 @@ void arr_print(Array *arr)
   printf("]\n");
 }
 
-// #ifndef TESTING
+#ifndef TESTING
 int main(void)
 {
 
@@ -194,4 +199,4 @@ int main(void)
 
   return 0;
 }
-// #endif
+#endif
