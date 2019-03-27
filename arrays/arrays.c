@@ -43,8 +43,12 @@ Array *create_array(int capacity)
 void destroy_array(Array *arr)
 {
   // Free all elements
-  free(arr->elements);
+  for (int i = 0; i < arr->count; i++)
+  {
+    free(arr->elements[i]);
+  }
   // Free array
+  free(arr->elements);
   free(arr);
 }
 
@@ -113,7 +117,7 @@ void arr_insert(Array *arr, char *element, int index)
     arr->elements[i + 1] = arr->elements[i];
   }
   // Copy the element and add it to the array
-  arr->elements[index] = element;
+  arr->elements[index] = strdup(element);
   // Increment count by 1
   arr->count++;
 }
@@ -130,7 +134,7 @@ void arr_append(Array *arr, char *element)
     resize_array(arr);
   }
   // Copy the element and add it to the end of the array
-  arr->elements[arr->count] = element;
+  arr->elements[arr->count] = strdup(element);
   // Increment count by 1
   arr->count++;
 }
@@ -151,7 +155,6 @@ void arr_remove(Array *arr, char *element)
     if (arr->elements[i] == element)
     {
       index = i;
-      arr->elements[i] = NULL;
       free(arr->elements[i]);
     }
   }
