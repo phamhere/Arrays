@@ -112,9 +112,9 @@ void arr_insert(Array *arr, char *element, int index)
     resize_array(arr);
   }
   // Move every element after the insert index to the right one position
-  for (int i = arr->count; i >= index; i--)
+  for (int i = arr->count; i > index; i--)
   {
-    arr->elements[i + 1] = arr->elements[i];
+    arr->elements[i] = arr->elements[i - 1];
   }
   // Copy the element and add it to the array
   arr->elements[index] = strdup(element);
